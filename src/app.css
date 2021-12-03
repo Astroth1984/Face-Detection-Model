@@ -8,7 +8,7 @@ canvas {
 
 .navbar {
     height: 50px;
-    background-color: #4064ac;
+    background-color: #405dac;
     display: flex;
     align-items: center;
     color: white;
@@ -45,8 +45,8 @@ label {
 }
 
 .avatar {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     margin-right: 20px;
 }
