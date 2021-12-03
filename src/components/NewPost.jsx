@@ -12,8 +12,7 @@ const NewPost = ({image}) => {
     const detections = await faceapi.detectAllFaces(
       imgRef.current, 
       new faceapi.TinyFaceDetectorOptions()
-    ).withFaceLandmarks()
-     .withFaceExpressions().withAgeAndGender();
+    ).withFaceLandmarks().withFaceExpressions().withAgeAndGender().withFaceDescriptors();
 
      canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current);
      faceapi.matchDimensions(canvasRef.current, {
@@ -24,11 +23,17 @@ const NewPost = ({image}) => {
      const resized = faceapi.resizeResults(detections, {
         width,
         height,
-     })
+     });
 
-     faceapi.draw.drawDetections(canvasRef.current, resized);
+      resized.forEach( detection => {
+        const box = detection.detection.box
+        const drawBox = new faceapi.draw.DrawBox(box, { label: Math.round(detection.age) + " year old " + detection.gender })
+        drawBox.draw(canvasRef.current)
+      });
+
+     //faceapi.draw.drawDetections(canvasRef.current, resized);
      faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
-     faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);  
+     faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);
   }
 
   useEffect(() => {
