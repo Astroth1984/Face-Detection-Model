@@ -54,7 +54,7 @@ function App() {
                   src="/face.svg"
                   alt=""
                 />
-                <img
+                {/* <img
                   className="addImg"
                   src="https://icon-library.com/images/maps-icon-png/maps-icon-png-5.jpg"
                   alt=""
@@ -63,8 +63,13 @@ function App() {
                   className="addImg"
                   src="https://d29fhpw069ctt2.cloudfront.net/icon/image/84451/preview.svg"
                   alt=""
+                /> */}
+                <img
+                  className="addImg"
+                  src="/name.png"
+                  alt=""
                 />
-                <button>Send</button>
+                <button style={{marginLeft:"30px"}}>Send</button>
               </label>
               <input 
                 onChange={(e)=> setFile(e.target.files[0])}
