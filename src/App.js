@@ -2,19 +2,28 @@ import "./app.css";
 import Navbar from "./components/Navbar";
 import {useState, useEffect} from "react";
 import NewPost from "./components/NewPost";
+import TagProfil from "./components/TagProfil";
 
 
 function App() {
 
-  const [file, setFile] = useState();
+  const [fileDetection, setFileDetection] = useState();
+  const [fileTag, setFileTag] = useState();
   const [image, setImage] = useState();
+  const [faceExp, setFaceExpression] = useState(false);
 
   useEffect(() =>{
      //file && console.log(URL.createObjectURL(file))
      const getImage = () => {
-       const img = new Image();
-       img.src = URL.createObjectURL(file);
-       img.onload = () => {
+        const img = new Image();
+        if(faceExp){
+          img.src = URL.createObjectURL(fileDetection);
+        } else {
+          img.src = URL.createObjectURL(fileTag);
+    
+        };
+        
+        img.onload = () => {
           setImage({
             url: img.src,
             height: img.height,
@@ -22,18 +31,32 @@ function App() {
           });
        }
      };
-     file && getImage();
-  },[file]);
+     fileDetection && getImage() || fileTag && getImage();
+     
+  },[fileDetection,fileTag, faceExp]);
+
+  const faceDetectionFunction = (e) =>{
+    e.preventDefault();
+    setFileDetection(e.target.files[0]);
+    setFaceExpression(true);
+  }
+
+  const tagPersonFunction = (e) => {
+    e.preventDefault();
+    setFileTag(e.target.files[0]);
+    setFaceExpression(false);
+  }
 
 
   return (
     <div>
       <Navbar />
-      {image ? (<NewPost image={image} />) : (
+      {image && faceExp ? (<NewPost image={image} />) : 
+        image && !faceExp ? (<TagProfil image={image} />) : (
         <div className="newPostCard">
           <div className="addPost">
             <img 
-              src="https://images.pexels.com/photos/3779055/pexels-photo-3779055.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" 
+              src="/face.svg" 
               alt=""
               className="avatar" 
             />
@@ -43,37 +66,31 @@ function App() {
                 placeholder="what's on your mind"
                 className="postInput" 
               />
-              <label htmlFor="file">
-              <img
-                  className="addImg"
-                  src="/addDocument.ico"
-                  alt=""
-                />
+              <label htmlFor="fileDetection">
                 <img
-                  className="addImg"
-                  src="/face.svg"
-                  alt=""
-                />
-                {/* <img
-                  className="addImg"
-                  src="https://icon-library.com/images/maps-icon-png/maps-icon-png-5.jpg"
-                  alt=""
-                />
+                    className="addImg"
+                    src="/addDocument.ico"
+                    alt=""
+                />  
+              </label>
+              <label htmlFor="fileTag">
                 <img
-                  className="addImg"
-                  src="https://d29fhpw069ctt2.cloudfront.net/icon/image/84451/preview.svg"
-                  alt=""
-                /> */}
-                <img
-                  className="addImg"
-                  src="/name.png"
-                  alt=""
-                />
+                    className="addImg"
+                    src="/name.png"
+                    alt=""
+                  />
                 <button style={{marginLeft:"30px"}}>Send</button>
               </label>
+                
               <input 
-                onChange={(e)=> setFile(e.target.files[0])}
-                id="file" 
+                onChange={faceDetectionFunction}
+                id="fileDetection" 
+                style={{display: 'none'}} 
+                type="file" 
+              />
+              <input 
+                onChange={tagPersonFunction}
+                id="fileTag" 
                 style={{display: 'none'}} 
                 type="file" 
               />
