@@ -29,6 +29,10 @@ Make use of them by loading them all in your React component:
 ## ImgRef & CanvasRef
 
 Create an ImgRef and CanvasRef using React Hook `useRef()` to access face api box.
+````
+<img ref={imgRef} crossOrigin="anonymous" src={url} alt="" />
+<canvas ef={canvasRef} height={height} width={width} />
+````
 
 ## Handle Detection
 
