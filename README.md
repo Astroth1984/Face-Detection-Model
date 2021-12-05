@@ -51,7 +51,7 @@ Create an ImgRef and CanvasRef using React Hook `useRef()` to access face api bo
 
 ## Match Dimensions
 
-Resize your canvas height and weight to match the image dimensions, so that the frames underlines the faces:
+Resize your canvas height and weight to match the image dimensions, so that the frames underline the faces:
 
 ````javascript
     const resized = faceapi.resizeResults(detections, {
