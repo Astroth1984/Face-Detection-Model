@@ -3,3 +3,11 @@
 ## Home Page
 
 ![home](interface.png)
+
+## Face Detection
+
+![face](face.png)
+
+## Tag a Recognized Person
+
+![tag](tag.png)
