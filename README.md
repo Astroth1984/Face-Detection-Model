@@ -83,9 +83,7 @@ resized.forEach( detection => {
 
 ````
 
-
-
-
+# Overview
 
 ## Home Page
 
@@ -98,3 +96,5 @@ resized.forEach( detection => {
 ## Tag a Recognized Person
 
 ![tag](tag.png)
+
+# Credits [Face-Api.js](https://github.com/justadudewhohacks/face-api.js)
